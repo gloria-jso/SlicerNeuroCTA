@@ -40,7 +40,12 @@ Install them using the Extension Manager before continuing.
 - Unzip the extension to `~/Documents/SlicerExtensions/` or elsewhere
 
 ### Load Model Weights
-The nnU-Net Segmentation and Graph Neural Network Classification model weights are loacated in GitHub Releases. Download them, unzip, and place them in the `Resources/Models` directory as such:
+The nnU-Net Segmentation and Graph Neural Network Classification model weights are loacated in this [GitHub repository's Releases](https://github.com/gloria-jso/SlicerNeuroCTA/releases/tag/v0.1.0). 
+- Download and unzip `clDice.zip` and `default.zip` into `NeuroCTA/Resources/Models/Segmentation`
+- Download and unzip `GINE.zip` and SAGE.zip into `NeuroCTA/Resources/Models/Classification`
+
+The tree should be as follows:
+
 <table>
 <tr>
 <td style="vertical-align: top;">
@@ -87,6 +92,9 @@ The Sample Data is also located in `NeuroCTA/Resources/SampleData`. The data can
 
 
 ### Run Examples
+
+Use the provided sample data to try out the following pipeline examples.
+
 #### A. Quick Full Run
 
 Using the `CTABrainContrastCropped.nrrd` volume, run through the whole pipeline with the settings shown in the image. Note that this is just a proof of concept on a small volume. Classification results are very poor.
