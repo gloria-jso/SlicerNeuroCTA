@@ -1038,7 +1038,7 @@ class Widget(qt.QWidget):
                     points = polyData.GetPoints()
                     for k in range(points.GetNumberOfPoints()):
                         pos = points.GetPoint(k)
-                        writer.writerow([node.GetName(), k, pos[0], pos[1], pos[2]])
+                        writer.writerow([node.GetName(), pos[0], pos[1], pos[2]])
 
         return filePath
 
