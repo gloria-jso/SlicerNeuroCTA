@@ -1,0 +1,7 @@
+*.pyc
+*.DS_Store
+__pycache__/
+*/Resources/Models/Segmentation/clDice/**
+*/Resources/Models/Segmentation/default/**
+*/Resources/Models/Classification/SAGE/**
+*/Resources/Models/Classification/GINE/**
