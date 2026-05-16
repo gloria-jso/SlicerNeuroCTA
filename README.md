@@ -45,6 +45,8 @@ Install them using the Extension Manager before continuing.
 
 ### Download the Extension
 - Download the GitHub repository as a Zip using the `< > Code  ` button -> `Download Zip`.
+![DownloadZip](assets/DownloadZip.png)
+
 - Unzip the extension to `~/Documents/SlicerExtensions/` or elsewhere
 
 ### Load Model Weights
