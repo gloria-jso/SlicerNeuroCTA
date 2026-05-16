@@ -107,7 +107,7 @@ Use the provided sample data to try out the following pipeline examples.
 
 #### A. Quick Full Run
 
-Using the `CTABrainContrastCropped.nrrd` volume, run through the whole pipeline with the settings shown in the image. Note that this is just a proof of concept on a small volume. Classification results are very poor.
+Using the `CTABrainContrastCropped.nrrd` volume, run through the whole pipeline with the settings shown in the image. The first run may take some time, but performance should improve once files are cached. This is only a proof of concept using a small volume, and the classification results are not meaningful since the models were trained on full segmentations.
 
 ![QuickSampleRun](assets/QuickSampleRun.png)
 
