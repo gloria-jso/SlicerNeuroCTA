@@ -18,13 +18,21 @@ NeuroCTA is a 3D Slicer extension for CTA vessel segmentation, vessel classifica
 ### b) Classification
 - Applies graph neural network inference to segmented vascular masks
 - Supports both `SAGE` and `GINE` model families
+- Model weights should be supplied in `NeuroCTA/Resources/Models/Classification/{SAGE,GINE}`
 - Produces a multi-segmentation result with artery classes assigned to connected foreground regions
-- Uses the supplied models in `NeuroCTA/Resources/Models/Classification/{SAGE,GINE}`
+-  Models were trained on binarized ground truth segmentations from the TopBrain CTA dataset. Performance degrades significantly on noisier inputs containing distal vessels or segmentation artifacts. Improving robustness requires retraining with more varied input segmentations at different preprocessing thresholds
 
 ### c) Skeletonization and Feature Extraction
-- `Medial Axis Thinning` backed by internal skeleton worker logic
+- `Medial Axis Thinning` backed by internal skeleton worker logic.
+  - Outputs branch points (BP) and endpoints (EP) as `vtkMRMLMarkupsFiducial` and skeletons in the form of `vtkMRMLModelNode`
+  - Tortuosity by Distance Metric (DM) is computed as the ratio of total path length to total straight-line distance across all branches in a segment. For unbranched segments this is clinically meaningful, but for branching segments the per-branch euclidean distances lose geometric significance and the metric should be interpreted with caution.
+The limitation is that for branching structures the euclidean distance of individual branches loses geometric meaning 
+  - Tortuosity by Sum of Angles Method (SOAM) is calculated for this method. 
 - `VMTK Extract Centerline` using VMTK and 3D Slicer's Extract Centerline module
-- Outputs skeleton models, branch point fiducials, and endpoint fiducials to the scene
+  - Outputs endpoints (EP) as `vtkMRMLMarkupsFiducial` and skeletons in the form of `vtkMRMLMarkupsCurveNode`.
+  - Tortuosity by SOAM is not calculated for this method. 
+  - Tortuosity by DM is output as null when the segment has more than one branch. 
+- Skeletons from both methods can be edited in `Edit centerline` module.
 
 ## Installation
 
@@ -248,5 +256,18 @@ nnUNet segmentation and Graph Neural Netowork classification models were trained
       primaryClass={cs.CV},
       url={https://arxiv.org/abs/2312.17670},
 }
+```
 
+Tortuosity by Sum of Angles Method (SOAM) was implemented according to [Bullitt et al.](https://pmc.ncbi.nlm.nih.gov/articles/PMC2430603/):
+```
+@article{bullitt2003tortuosity,
+    title={Measuring tortuosity of the intracerebral vasculature from MRA images},
+    author={Bullitt, Elizabeth and Gerig, Guido and Pizer, Stephen M and Lin, Weili and Aylward, Stephen R},
+    journal={IEEE Transactions on Medical Imaging},
+    volume={22},
+    number={9},
+    pages={1163--1171},
+    year={2003},
+    doi={10.1109/TMI.2003.816964}
+}
 ```
